@@ -1,0 +1,20 @@
+.contact-us {
+    background-color: #FFF;
+    width: 500px;
+    min-height: 200px;
+    max-height: 1000px;
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page {
+    width: 100%;
+    height: calc(100vh - 60px - 100px);
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

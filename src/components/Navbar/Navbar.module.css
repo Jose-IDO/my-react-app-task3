@@ -1,0 +1,49 @@
+nav {
+    position: fixed;
+    top: 0;
+    height: 60px;
+    width: 100vw;
+    background-color: rgb(39, 76, 119);
+}
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.link {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    /* padding: 10px; */
+}
+.link:hover {
+    color: rgb(220, 220, 220);
+}
+
+.shopping-cart-icon {
+    height: 20px;
+    height: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.profile-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

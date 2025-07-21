@@ -1,0 +1,11 @@
+search icon: https://www.flaticon.com/authors/tanah-basah
+motherboard: Photo by Athena Sandrini: https://www.pexels.com/photo/black-and-gray-motherboard-2582937/
+imac: Photo by Elvis: https://www.pexels.com/photo/photo-of-a-laptop-and-a-tablet-on-the-table-2528118/
+Mac desktop: https://www.pexels.com/photo/silver-imac-apple-magic-keyboard-and-magic-mouse-on-wooden-table-38568/
+latest-mac: Photo by Nao Triponez: https://www.pexels.com/photo/macbook-pro-129208/
+windows-laptop: Photo by Eduardo Rosas: https://www.pexels.com/photo/turned-on-white-laptop-computer-968631/
+iphone-7: Photo by Jess Bailey Designs: https://www.pexels.com/photo/silver-iphone-x-with-airpods-788946/
+samsung: Photo by Pixabay: https://www.pexels.com/photo/person-holding-android-smartphone-with-black-screen-301718/
+close icon: https://www.flaticon.com/free-icons/close
+cart icon: https://www.flaticon.com/authors/those-icons
+pexels, flaticon
