@@ -7,14 +7,6 @@ import { IMac, IPhone, LatestMac } from './config/files'
 
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
-import { Home } from './pages/Home'
-import { NotFound } from './pages/NotFound'
-import { Cart } from './pages/Cart'
-import { ContactUs } from './pages/ContactUs'
-import { Products } from './pages/Products'
-import { ProductDetails } from './pages/ProductDetails'
-import { Profile } from './pages/Profile'
-import { ProtectedRoute } from './components/ProtectedRoute'
 
 
 export type Product = {
