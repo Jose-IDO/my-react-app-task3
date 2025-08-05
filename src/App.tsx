@@ -4,7 +4,6 @@ import { Navbar } from './components/Navbar/Navbar'
 import { Footer } from './components/Footer/Footer'
 
 import { IMac, IPhone, LatestMac } from './config/files'
-import { Routes, Route, useLocation, useNavigate, replace } from 'react-router'
 
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
@@ -38,43 +37,14 @@ function App() {
   const [isLoginFormVisible, setShowLoginForm] = useState(false)
   const [isRegFormVisible, setShowRegForm] = useState(false)
 
-  const location = useLocation()
-  const navigate = useNavigate()
-  const addToCart = (id: number) => {
-
-  }
-  const closeLoginForm = () => {
-    console.log({ location });
-    setShowLoginForm(false)
-    if(location.search.includes('redirectTo=/profile')) {
-      console.log(true);
-      setShowLoginForm(false)
-      navigate(location.pathname)
-    } else {
-      setShowLoginForm(false)
-    }
-    
-  }
   return (
     <div id='app-container'>
-      <Login isVisible={isLoginFormVisible} close={() => closeLoginForm()} />
+      <Login isVisible={isLoginFormVisible} close={() => setShowLoginForm(false)} />
       <Register close={() => setShowRegForm(false)} isVisible={isRegFormVisible} />
 
       <div id='scrollable'>
         <Navbar showLoginForm={() => setShowLoginForm(true)} showRegisterForm={() => setShowRegForm(true)} />
-        <Routes>
-          <Route index element={<Home stock={stock} addToCart={addToCart} showLogin={() => setShowLoginForm(true)} />} />
-          <Route path='cart' element={<Cart />} />
-          <Route path='contact-us' element={<ContactUs />} />
-          <Route path='products'>
-            <Route index element={<Products stock={stock} addToCart={addToCart} />} />
-            <Route path=':id' element={<ProductDetails stock={stock} addToCart={addToCart} />} />
-          </Route>
-          <Route element={<ProtectedRoute />}>
-            <Route path='profile' element={<Profile />} />
-          </Route>
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+
 
       </div>
       <Footer />
