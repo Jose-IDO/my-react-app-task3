@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { StockContainer } from '../components/Stock/StockContainer'
-import { Search } from '../components/Search/Search'
-import type { Product } from '../App'
+// import { StockContainer } from '../components/Stock/StockContainer'
+// import { Search } from '../components/Search/Search'
+// import type { Product } from '../App'
+import { Navbar } from '../components/Navbar/Navbar'
 
 type HomeProps = {
-    stock: Product[],
-    addToCart: (id: number) => void
+    showLoginForm: () => void,
+    showRegisterForm: () => void
 }
-export const Home: React.FC<HomeProps> = ({ stock, addToCart }) => {
+export const Home: React.FC<HomeProps> = ({ showLoginForm,showRegisterForm }) => {
     return (
-        <>
-            <Search />
-            <StockContainer stock={stock} addToCart={addToCart}/>
-        </>
+
+    <Navbar showLoginForm={showLoginForm} showRegisterForm={showRegisterForm}/>
+
+    
 
     )
 }
