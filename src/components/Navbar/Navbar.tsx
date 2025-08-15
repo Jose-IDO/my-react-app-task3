@@ -14,7 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}
         <nav>
             <div className={styles.content}>
                 <div className = {styles['logo-container']}> 
-                <Text variant={'h2'} style={{ margin: 0, padding: 0, fontSize:40,color:'white' }}>Jobseek.comp</Text>
+                <Text variant={'h2'} style={{ margin: 0, padding: 0, fontSize:40, color:'white' }}>Jobseek.com</Text>
 
                 </div>
 
@@ -30,13 +30,9 @@ export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}
                     <NavLink to="/Register" className={styles.link}>Register</NavLink>
                     <span className={styles.link} onClick={showLoginForm}>Login</span>
                     <span className={styles.link} onClick={showRegisterForm}>Register</span>
-                    <img
-                        src={ShoppingIcon}
-                        className={styles['shopping-cart-icon']}
-                        alt='Image of a shopping cart, navigating to shopping cart page'
-                    />
+
                     <div className={styles['profile-icon']}>
-                        <Text variant={'span'}>U</Text>
+                        <Text variant={'span'}>User</Text>
                     </div>
 
                 </div>
