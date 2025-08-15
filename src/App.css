@@ -1,8 +1,16 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+AU+QLD:wght@100..400&display=swap');
+
+
 #app-container {
   min-height: calc(100vh - 100px);
   position: relative;
   width: 100vw;
   padding-bottom: 100px;
+  background-image: url(./assets/graduate.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #scrollable {

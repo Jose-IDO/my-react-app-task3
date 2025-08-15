@@ -3,13 +3,41 @@ nav {
     top: 0;
     height: 60px;
     width: 100vw;
-    background-color: rgb(39, 76, 119);
+    background: linear-gradient(to right, #2c5853, #fab449);
+
+    height: 100px;
+  width: 100%;
+  flex-direction: row;
+  /* background: linear-gradient(to right, #d96614, #164437); */
+
+  
+  z-index: 1000;
 }
 
+ .logo-container{
+        display: flex;
+    align-items: center;
+    /* gap: 20px; */
+    width: 30%;
+    justify-content: space-between;
+
+}
+
+.navbar-links{
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 40%;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+
 .content {
-    max-width: 1200px;
+    max-width: 90%;
     margin: auto;
-    padding: 10px;
+    /* padding: 10px; */
     /* background-color: red; */
     display: flex;
     align-items: center;
@@ -25,10 +53,17 @@ nav {
     color: white;
     padding: 5px 10px;
     cursor: pointer;
-    /* padding: 10px; */
+    font-size: 30px;
+
 }
 .link:hover {
     color: rgb(220, 220, 220);
+    background: linear-gradient(to right, #3a7475, #fdba3f);
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    transform: translateY(-3px)
+
+    
 }
 
 .shopping-cart-icon {

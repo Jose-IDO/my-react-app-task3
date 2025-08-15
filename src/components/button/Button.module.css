@@ -1,0 +1,15 @@
+.button{
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 30px;
+
+}
+.button:hover {
+    color: rgb(220, 220, 220);
+    background: linear-gradient(to right, #3a7475, #fdba3f);
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    transform: translateY(-3px);
+}

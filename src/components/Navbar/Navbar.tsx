@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import ShoppingIcon from '../../assets/shopping-cart.png'
 import { Text } from '../Text/Text'
 import { NavLink } from 'react-router'
+import { Searchbar } from '../Search/Searchbar'
 
 type NavbarProps = {
     showLoginForm: () => void,
@@ -12,9 +13,16 @@ export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}
     return (
         <nav>
             <div className={styles.content}>
-                <Text variant={'h2'} style={{ margin: 0, padding: 0 }}>CT Shop</Text>
-                <div className={styles.links}>
+                <div className = {styles['logo-container']}> 
+                <Text variant={'h2'} style={{ margin: 0, padding: 0, fontSize:40,color:'white' }}>Jobseek.comp</Text>
 
+                </div>
+
+                <Searchbar />
+
+                <div className={styles['navbar-links']}> 
+
+                    
                     <NavLink to="/" className={styles.link}>Home</NavLink>
                     <NavLink to="/contact-us" className={styles.link}>Contact Us</NavLink>
                     {/* <NavLink to="/Landing-Page" className={styles.link}>Landing Page</NavLink> */}
@@ -30,7 +38,10 @@ export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}
                     <div className={styles['profile-icon']}>
                         <Text variant={'span'}>U</Text>
                     </div>
+
                 </div>
+
+
             </div>
         </nav>
     )
