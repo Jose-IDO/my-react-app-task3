@@ -1,19 +1,49 @@
 import React, { useEffect, useRef, useState } from 'react'
-// import { StockContainer } from '../components/Stock/StockContainer'
-// import { Search } from '../components/Search/Search'
-// import type { Product } from '../App'
 import { Navbar } from '../components/Navbar/Navbar'
+import {Whitebox} from '../components/Whitebox/Whitebox'
+import styles from '../components/Page styling/home.module.css'
+
 
 type HomeProps = {
     showLoginForm: () => void,
     showRegisterForm: () => void
 }
-export const Home: React.FC<HomeProps> = ({ showLoginForm,showRegisterForm }) => {
+
+export const Home: React.FC<HomeProps> = ({ showLoginForm, showRegisterForm }) => {
     return (
+        <>
+            <Navbar showLoginForm={showLoginForm} showRegisterForm={showRegisterForm}/>
+            
+            <div style={{ marginTop: '120px' }}> 
+                <Whitebox modcolor='modcolorone'>
+                    <div>
+                        <h1 className = {styles.h1}>WELCOME TO JOBSEEK!</h1> 
+                        <h1 className = {styles.h1}> SOUTH AFRICA'S PREMIERE, ALL INLCUSIVE SOLUTION </h1> 
+                        <h1 className = {styles.h1}>TO YOUR JOB APPLICATION MANAGEMENT NEEDS!</h1> 
+                        <p className = {styles.p}> 
+                            Jobseek is a platform designed to streamline the job application process for both job seekers. 
+                            Our goal is to make job searching and tracking as efficient and effective as possible.
+                        </p>
+                    </div>
 
-    <Navbar showLoginForm={showLoginForm} showRegisterForm={showRegisterForm}/>
 
-    
+                    <div className = {styles['interactive-elements']}>
 
-    )
+                        <div>
+
+
+                        </div>
+
+
+                        <div>
+
+                            
+                        </div>
+
+
+                    </div>
+                </Whitebox>
+            </div>
+        </>
+        )
 }

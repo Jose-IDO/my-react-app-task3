@@ -1,0 +1,29 @@
+.h1{
+    font-size: 40px;
+    font-weight: 600;
+    color: #060101;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+
+}
+
+.p{
+    font-size: 20px;
+    font-weight: 400;
+    color: #060101;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.interactive-elements{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}

@@ -1,18 +1,19 @@
 import React from 'react'
-import styles from './Buttons.module.css' 
+import styles from './Button.module.css' 
 
 type ButtonProps = {
-  children: React.ReactNode;
-  bgColor: string;
+  children: string;
+  // bgColor: string;
   onClick?: () => void
  
 
 }
 
-export const Buttons: React.FC<ButtonProps> = ({ children, bgColor, onClick }) => {
+export const Buttons: React.FC<ButtonProps> = ({children, onClick }) => {
   return (
-    <button className={`${styles.button} ${styles[bgColor]}`} onClick = {onClick}>
+    <button className={styles.button} onClick = {onClick}>
       {children}
+   
     </button>
   )
 }

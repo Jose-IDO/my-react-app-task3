@@ -1,12 +1,17 @@
 import React, { useRef } from 'react'
 import { NotFoundComponent } from '../components/NotFoundComponent/NotFoundComponent'
-import { Search } from '../components/Search/Search'
+import {Whitebox} from '../components/Whitebox/Whitebox'
 
 export const NotFound = () => {
   return (
     <>
-      <Search />
-      <NotFoundComponent />
+    
+      
+      {/* <Whitebox modcolor='not-found'> */}
+
+        <NotFoundComponent />
+
+      {/* </Whitebox> */}
     </>
 
   )

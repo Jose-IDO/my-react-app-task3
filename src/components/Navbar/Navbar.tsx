@@ -1,15 +1,16 @@
 import React from 'react'
 import styles from './Navbar.module.css'
-import ShoppingIcon from '../../assets/shopping-cart.png'
+// import ShoppingIcon from '../../assets/shopping-cart.png'
 import { Text } from '../Text/Text'
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom';
 import { Searchbar } from '../Search/Searchbar'
+// import {Whitebox} from '../Whitebox/Whitebox'
 
 type NavbarProps = {
-    showLoginForm: () => void,
-    showRegisterForm: () => void
+    showLoginForm?: () => void,
+    showRegisterForm?: () => void
 }
-export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}) => {
+export const Navbar: React.FC<NavbarProps> = () => {
     return (
         <nav>
             <div className={styles.content}>
@@ -24,16 +25,16 @@ export const Navbar: React.FC<NavbarProps> = ({ showLoginForm, showRegisterForm}
 
                     
                     <NavLink to="/" className={styles.link}>Home</NavLink>
-                    <NavLink to="/contact-us" className={styles.link}>Contact Us</NavLink>
-                    {/* <NavLink to="/Landing-Page" className={styles.link}>Landing Page</NavLink> */}
+                    <NavLink to="/contact-us" className={styles.link}>Contact Us</NavLink>         
+                    <NavLink to="/AboutUs" className={styles.link}>About Us</NavLink>
                     <NavLink to="/Login" className={styles.link}>Login</NavLink>
                     <NavLink to="/Register" className={styles.link}>Register</NavLink>
-                    <span className={styles.link} onClick={showLoginForm}>Login</span>
-                    <span className={styles.link} onClick={showRegisterForm}>Register</span>
 
                     <div className={styles['profile-icon']}>
                         <Text variant={'span'}>User</Text>
                     </div>
+
+
 
                 </div>
 
