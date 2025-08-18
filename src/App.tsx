@@ -1,38 +1,27 @@
-
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Navbar } from './components/Navbar/Navbar'
 import { Footer } from './components/Footer/Footer'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 import type { User } from './types/Job'
-import { userAPI } from './services/api'
-
-import { LandingPage } from './LandingPage'
+import { userAPI } from './services/Api'
+import { LandingPage } from './pages/LandingPage'
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
-import { Home } from './pages/Home'
+import { Dashboard } from './pages/Dashboard'
 import { NotFound } from './pages/NotFound'
 import { ContactUs } from './pages/ContactUs'
-
-export type Product = {
-  name: string,
-  imgLink: string,
-  description: string,
-  id: number
-}
+import { JobDetails } from './pages/JobDetails'
+import { AddJob } from './pages/AddJob'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
   // Authentication states
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [isAuthLoading, setIsAuthLoading] = useState(true)
   
-
   const [isLoginFormVisible, setShowLoginForm] = useState(false)
   const [isRegFormVisible, setShowRegForm] = useState(false)
-  
-
-  const [cart, setCart] = useState<Product[]>([])
-
 
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser')
@@ -45,7 +34,6 @@ function App() {
     }
     setIsAuthLoading(false)
   }, [])
-
 
   const handleLogin = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
@@ -71,12 +59,10 @@ function App() {
     }
   }
 
-
   const handleRegister = async (userData: Omit<User, 'id'>): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsAuthLoading(true)
       
-
       const existingUser = await userAPI.getUserByEmail(userData.email)
       if (existingUser) {
         return { success: false, error: 'Email already registered' }
@@ -94,12 +80,10 @@ function App() {
     }
   }
 
-
   const handleLogout = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
   }
-
 
   const isAuthenticated = !!currentUser
 
@@ -138,28 +122,47 @@ function App() {
           onLogout={handleLogout}
         />
         <Routes>
-          <Route index element={
-            <Home 
+          {/* Landing page - what visitors see first */}
+          <Route path="/" element={
+            <LandingPage 
               showLoginForm={() => setShowLoginForm(true)} 
               showRegisterForm={() => setShowRegForm(true)}
               isAuthenticated={isAuthenticated}
-              currentUser={currentUser}
             />
           } />
-          <Route path="*" element={<NotFound />} />
-          <Route path="contact-us" element={<ContactUs/>} />
-          <Route path="Login" element={<Login close={() => close()} isVisible onLogin={handleLogin} />} />
-          <Route path="Register" element={<Register close={() => close()} isVisible onRegister={handleRegister} />} />
-          <Route path="Landing-Page" element={<LandingPage/>} />
           
-
-          {isAuthenticated && (
-            <>
-              <Route path="dashboard" element={<div>Dashboard - User Jobs Here</div>} />
-              <Route path="jobs/:jobId" element={<div>Job Detail Page</div>} />
-              <Route path="add-job" element={<div>Add Job Form</div>} />
-            </>
-          )}
+          {/* Auth routes */}
+          <Route path="/login" element={
+            isAuthenticated ? <Navigate to="/dashboard" replace /> : 
+            <Login close={() => setShowLoginForm(false)} isVisible={true} onLogin={handleLogin} />
+          } />
+          <Route path="/register" element={
+            isAuthenticated ? <Navigate to="/dashboard" replace /> : 
+            <Register close={() => setShowRegForm(false)} isVisible={true} onRegister={handleRegister} />
+          } />
+          
+          {/* Public routes */}
+          <Route path="/contact-us" element={<ContactUs />} />
+          
+          {/* Protected routes - require authentication */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Dashboard currentUser={currentUser!} />
+            </ProtectedRoute>
+          } />
+          <Route path="/jobs/:jobId" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <JobDetails currentUser={currentUser!} />
+            </ProtectedRoute>
+          } />
+          <Route path="/add-job" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <AddJob currentUser={currentUser!} />
+            </ProtectedRoute>
+          } />
+          
+          {/* 404 page */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />

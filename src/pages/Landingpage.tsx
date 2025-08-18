@@ -1,82 +1,59 @@
-
-import React, { useState } from 'react'
-import styles from './Auth.module.css'
-import { Overlay } from '../components/Overlay/Overlay'
+// src/pages/LandingPage.tsx
+import React from 'react'
+import { Whitebox } from '../components/Whitebox/Whitebox'
+import styles from '../components/Page styling/home.module.css'
 import { Text } from '../components/Text/Text'
-import { TextInput } from '../components/Inputs/TextInput'
 import { Buttons } from '../components/button/Button'
+import { Navigate } from 'react-router-dom'
 
-type RegisterProps = {
-    close: () => void,
-    isVisible: boolean,
-    onRegister: (userData: any) => Promise<{ success: boolean; error?: string }>
+type LandingPageProps = {
+    showLoginForm: () => void,
+    showRegisterForm: () => void,
+    isAuthenticated: boolean
 }
 
-export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister }) => {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-
-    const handleSubmit = async () => {
-        setError('')
-
-        if (!username || !email || !password) {
-            setError('Please fill in all fields')
-            return
-        }
-
-        if (!email.includes('@')) {
-            setError('Please enter a valid email')
-            return
-        }
-
-        const userData = {
-            username,
-            email,
-            password
-        }
-
-        const result = await onRegister(userData)
-        if (!result.success) {
-            setError(result.error || 'Registration failed')
-        }
+export const LandingPage: React.FC<LandingPageProps> = ({ 
+    showLoginForm, 
+    showRegisterForm, 
+    isAuthenticated 
+}) => {
+    // If user is already logged in, redirect to dashboard
+    if (isAuthenticated) {
+        return <Navigate to="/dashboard" replace />
     }
 
-    if (!isVisible) return null
-
     return (
-        <Overlay close={close}>
-            <div className={styles['auth-container']}>
-                <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)' }}>Register</Text>
-                
-                {error && (
-                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px' }}>
-                        {error}
-                    </Text>
-                )}
-                
-                <TextInput 
-                    label='Username' 
-                    onChange={(ev) => setUsername(ev.target.value)}
-                />
-                
-                <TextInput 
-                    label='Email' 
-                    onChange={(ev) => setEmail(ev.target.value)}
-                />
-                
-                <TextInput 
-                    label='Password' 
-                    onChange={(ev) => setPassword(ev.target.value)}
-                />
+        <>            
+            <div style={{ marginTop: '120px' }}> 
+                <Whitebox modcolor='modcolorone'>
+                    <div>
+                        <h1 className={styles.h1}>WELCOME TO JOBSEEK!</h1> 
+                        <h1 className={styles.h1}>SOUTH AFRICA'S PREMIERE, ALL INCLUSIVE SOLUTION</h1> 
+                        <h1 className={styles.h1}>TO YOUR JOB APPLICATION MANAGEMENT NEEDS!</h1> 
+                        <p className={styles.p}> 
+                            Jobseek is a platform designed to streamline the job application process for job seekers. 
+                            Our goal is to make job searching and tracking as efficient and effective as possible.
+                        </p>
+                        <p className={styles.p}>
+                            Track your applications, manage your job search, and stay organized with our comprehensive 
+                            job application tracker. Monitor which applications are pending, which companies have 
+                            interviewed you, and keep track of rejections to improve your approach.
+                        </p>
+                    </div>
 
-                <Buttons 
-                    value="Register" 
-                    style={{ marginTop: 20 }} 
-                    onClick={handleSubmit}
-                />
+                    <div className={styles['interactive-elements']}>
+                        <div className={styles.hometextbox}>
+                            <Text variant={'h1'}>First time here? Register below</Text>
+                            <Buttons onClick={showRegisterForm}>Register</Buttons>
+                        </div>
+
+                        <div className={styles.hometextbox}>
+                            <Text variant={'h1'}>Have an account? Login below</Text>
+                            <Buttons onClick={showLoginForm}>Login</Buttons>
+                        </div>
+                    </div>
+                </Whitebox>
             </div>
-        </Overlay>
+        </>
     )
 }
