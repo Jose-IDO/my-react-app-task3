@@ -51,7 +51,7 @@ export const jobAPI = {
       body: JSON.stringify(newJob),
     });
     
- 
+
     const existingJobs = JSON.parse(localStorage.getItem('userJobs') || '[]');
     existingJobs.push(newJob);
     localStorage.setItem('userJobs', JSON.stringify(existingJobs));
