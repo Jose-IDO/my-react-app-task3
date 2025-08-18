@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+
+import React, { useState } from 'react'
 import styles from './Auth.module.css'
 import { Overlay } from '../Overlay/Overlay'
 import { TextInput } from '../Inputs/TextInput'
@@ -7,30 +8,57 @@ import { Text } from '../Text/Text'
 
 type LoginProps = {
     close: () => void,
-    isVisible: boolean
+    isVisible: boolean,
+    onLogin: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
 }
-// container component, it fetches data, sends data, managages state, as well as sending it to representation components
-export const Login: React.FC<LoginProps> = ({ close, isVisible }) => {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
 
-    const handleSubmit = () => {
-        console.log({ email, password });
-        if(email.trim() && password.trim()) {
-            // continue with login
-        } else {
-            // issue out errors and such
+export const Login: React.FC<LoginProps> = ({ close, isVisible, onLogin }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleSubmit = async () => {
+        setError('')
+        
+        if (!email || !password) {
+            setError('Please fill in all fields')
+            return
+        }
+
+        const result = await onLogin(email, password)
+        if (!result.success) {
+            setError(result.error || 'Login failed')
         }
     }
+
     if (!isVisible) return null
+
     return (
         <Overlay close={close}>
             <div className={styles['auth-container']}>
-                {/* components, representational components: look and feel of the app. They control no state, all data is passed as props */}
                 <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)' }}>Login</Text> 
-                <TextInput label="Email" onChange={(ev) => { setEmail(ev.target.value)}} />
-                <TextInput label="Password" onChange={(ev) => { setPassword(ev.target.value) }} />
-                <Button value={'Login'} style={{ marginTop: 20 }} onClick={handleSubmit}/>
+                
+                {error && (
+                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px' }}>
+                        {error}
+                    </Text>
+                )}
+                
+                <TextInput 
+                    label="Email" 
+                    onChange={(ev) => setEmail(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label="Password" 
+                    onChange={(ev) => setPassword(ev.target.value)} 
+                />
+                
+                <Button 
+                    value="Login" 
+                    style={{ marginTop: 20 }} 
+                    onClick={handleSubmit}
+                />
             </div>
         </Overlay>
     )
