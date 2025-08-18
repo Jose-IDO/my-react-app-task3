@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Navbar.module.css'
 // import ShoppingIcon from '../../assets/shopping-cart.png'
 import { Text } from '../Text/Text'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Searchbar } from '../Search/Searchbar'
 // import {Whitebox} from '../Whitebox/Whitebox'
 
@@ -11,6 +11,7 @@ type NavbarProps = {
     showRegisterForm?: () => void
 }
 export const Navbar: React.FC<NavbarProps> = () => {
+    
     return (
         <nav>
             <div className={styles.content}>

@@ -5,7 +5,9 @@
     cursor: pointer;
     font-size: 30px;
     height: 60px;
-    width: 100px;
+    width: fit-content;
+    background-color: #3a7475;
+    border-radius: 5px;
 
 }
 .button:hover {

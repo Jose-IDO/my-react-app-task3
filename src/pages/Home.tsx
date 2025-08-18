@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Navbar } from '../components/Navbar/Navbar'
 import {Whitebox} from '../components/Whitebox/Whitebox'
 import styles from '../components/Page styling/home.module.css'
+import { Text } from '../components/Text/Text'
+import { Buttons } from '../components/button/Button'
 
 
 type HomeProps = {
@@ -29,13 +31,22 @@ export const Home: React.FC<HomeProps> = ({ showLoginForm, showRegisterForm }) =
 
                     <div className = {styles['interactive-elements']}>
 
-                        <div>
 
+
+                        <div className = {styles.hometextbox}>
+
+                        <Text variant={'h1'}>first time here? Register below</Text>
+                        <Buttons onClick={showRegisterForm}> Register  </Buttons>
+                            
 
                         </div>
 
+                        
 
-                        <div>
+                        <div className = {styles.hometextbox}>
+
+                        <Text variant={'h1'}>Have an account? Login below</Text>
+                        <Buttons onClick={showLoginForm} > Login </Buttons>
 
                             
                         </div>

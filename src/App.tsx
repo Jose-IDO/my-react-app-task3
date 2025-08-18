@@ -1,9 +1,11 @@
-import { useState } from 'react'
+// Updated App.tsx with authentication using useState
+import { useState, useEffect } from 'react'
 import './App.css'
 import { Navbar } from './components/Navbar/Navbar'
 import { Footer } from './components/Footer/Footer'
-import {Routes, Route} from 'react-router'
-
+import { Routes, Route } from 'react-router'
+import { User } from './types/Job'
+import { userAPI } from './services/api'
 
 import { LandingPage } from './LandingPage'
 import { Login } from './components/Auth/Login'
@@ -12,44 +14,153 @@ import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { ContactUs } from './pages/ContactUs'
 
-
 export type Product = {
   name: string,
   imgLink: string,
   description: string,
   id: number
 }
+
 function App() {
-  // hooks: React functions that allow us to do something useful in our application
-  // useState: allows us to set, update (maintain) states of our data. Returns an array, 0 variable, 1 func to update or set the variable
-  const [count, setCount] = useState(0)
-  // const [stock, setStock] = useState<Product[]>([
-  //   { name: "Mac", imgLink: IMac, description: "Just a mac", price: 21000, id: 1 },
-  //   { name: "iPhone 7", imgLink: IPhone, description: "iPhone with high specs", price: 12300, id: 2 },
-  //   { name: "Mac", imgLink: LatestMac, description: "Latest Mac with impressive specs", price: 31000, id: 3 },
-  // ])
-  const [cart, setCart] = useState<Product[]>([])
+  // Authentication states
+  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [isAuthLoading, setIsAuthLoading] = useState(true)
+  
+  // Modal states
   const [isLoginFormVisible, setShowLoginForm] = useState(false)
   const [isRegFormVisible, setShowRegForm] = useState(false)
+  
+  // Other existing states
+  const [cart, setCart] = useState<Product[]>([])
+
+  // Check if user is logged in on app start
+  useEffect(() => {
+    const savedUser = localStorage.getItem('currentUser')
+    if (savedUser) {
+      try {
+        setCurrentUser(JSON.parse(savedUser))
+      } catch (error) {
+        localStorage.removeItem('currentUser')
+      }
+    }
+    setIsAuthLoading(false)
+  }, [])
+
+  // Login function
+  const handleLogin = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsAuthLoading(true)
+      const foundUser = await userAPI.getUserByEmail(email)
+      
+      if (!foundUser) {
+        return { success: false, error: 'User not found' }
+      }
+      
+      if (foundUser.password !== password) {
+        return { success: false, error: 'Invalid password' }
+      }
+
+      setCurrentUser(foundUser)
+      localStorage.setItem('currentUser', JSON.stringify(foundUser))
+      setShowLoginForm(false) // Close login modal
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: 'Login failed. Please try again.' }
+    } finally {
+      setIsAuthLoading(false)
+    }
+  }
+
+  // Register function
+  const handleRegister = async (userData: Omit<User, 'id'>): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsAuthLoading(true)
+      
+      // Check if user already exists
+      const existingUser = await userAPI.getUserByEmail(userData.email)
+      if (existingUser) {
+        return { success: false, error: 'Email already registered' }
+      }
+
+      const newUser = await userAPI.createUser(userData)
+      setCurrentUser(newUser)
+      localStorage.setItem('currentUser', JSON.stringify(newUser))
+      setShowRegForm(false) // Close register modal
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: 'Registration failed. Please try again.' }
+    } finally {
+      setIsAuthLoading(false)
+    }
+  }
+
+  // Logout function
+  const handleLogout = () => {
+    setCurrentUser(null)
+    localStorage.removeItem('currentUser')
+  }
+
+  // Check if user is authenticated
+  const isAuthenticated = !!currentUser
+
+  if (isAuthLoading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '18px'
+      }}>
+        Loading...
+      </div>
+    )
+  }
 
   return (
     <div id='app-container'>
-      <Login isVisible={isLoginFormVisible} close={() => setShowLoginForm(false)} />
-      <Register close={() => setShowRegForm(false)} isVisible={isRegFormVisible} />
+      <Login 
+        isVisible={isLoginFormVisible} 
+        close={() => setShowLoginForm(false)} 
+        onLogin={handleLogin}
+      />
+      <Register 
+        close={() => setShowRegForm(false)} 
+        isVisible={isRegFormVisible} 
+        onRegister={handleRegister}
+      />
 
       <div id='scrollable'>
-        <Navbar showLoginForm={() => setShowLoginForm(true)} showRegisterForm={() => setShowRegForm(true)} />
+        <Navbar 
+          showLoginForm={() => setShowLoginForm(true)} 
+          showRegisterForm={() => setShowRegForm(true)}
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
         <Routes>
-          <Route index element = {<Home showLoginForm={() => setShowLoginForm(true)} showRegisterForm={() => setShowRegForm(true)}/>} />
-          <Route path = '*' element ={<NotFound />} />
-          <Route path = "contact-us" element = {<ContactUs/>} />
-          <Route path = "Login" element = {<Login close = {() => close()} isVisible />} />
-          <Route path = "Register" element = {<Register close = {() => close()} isVisible />} />
-          <Route path = "Landing-Page" element = {<LandingPage/>} />
-
+          <Route index element={
+            <Home 
+              showLoginForm={() => setShowLoginForm(true)} 
+              showRegisterForm={() => setShowRegForm(true)}
+              isAuthenticated={isAuthenticated}
+              currentUser={currentUser}
+            />
+          } />
+          <Route path="*" element={<NotFound />} />
+          <Route path="contact-us" element={<ContactUs/>} />
+          <Route path="Login" element={<Login close={() => close()} isVisible onLogin={handleLogin} />} />
+          <Route path="Register" element={<Register close={() => close()} isVisible onRegister={handleRegister} />} />
+          <Route path="Landing-Page" element={<LandingPage/>} />
+          
+          {/* Protected routes - only show if authenticated */}
+          {isAuthenticated && (
+            <>
+              <Route path="dashboard" element={<div>Dashboard - User Jobs Here</div>} />
+              <Route path="jobs/:jobId" element={<div>Job Detail Page</div>} />
+              <Route path="add-job" element={<div>Add Job Form</div>} />
+            </>
+          )}
         </Routes>
-
-
       </div>
       <Footer />
     </div>
