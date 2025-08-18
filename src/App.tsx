@@ -1,120 +1,61 @@
-
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Navbar } from './components/Navbar/Navbar'
 import { Footer } from './components/Footer/Footer'
 import { Routes, Route } from 'react-router'
 import type { User } from './types/Job'
-import { userAPI } from './services/api'
+import { userAPI } from './services/Api'
 
-import { LandingPage } from './LandingPage'
+import { LandingPage } from './pages/Landingpage'
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
-import { Home } from './pages/Home'
+import { Dashboard } from './pages/Dashboard'
 import { NotFound } from './pages/NotFound'
 import { ContactUs } from './pages/ContactUs'
-
-export type Product = {
-  name: string,
-  imgLink: string,
-  description: string,
-  id: number
-}
+import { JobDetails } from './pages/JobDetails'
+import { AddJob } from './pages/AddJob'
 
 function App() {
-  // Authentication states
   const [currentUser, setCurrentUser] = useState<User | null>(null)
-  const [isAuthLoading, setIsAuthLoading] = useState(true)
-  
-
   const [isLoginFormVisible, setShowLoginForm] = useState(false)
   const [isRegFormVisible, setShowRegForm] = useState(false)
-  
-
-  const [cart, setCart] = useState<Product[]>([])
-
 
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser')
     if (savedUser) {
-      try {
-        setCurrentUser(JSON.parse(savedUser))
-      } catch (error) {
-        localStorage.removeItem('currentUser')
-      }
+      setCurrentUser(JSON.parse(savedUser))
     }
-    setIsAuthLoading(false)
   }, [])
 
-
   const handleLogin = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
-    try {
-      setIsAuthLoading(true)
-      const foundUser = await userAPI.getUserByEmail(email)
-      
-      if (!foundUser) {
-        return { success: false, error: 'User not found' }
-      }
-      
-      if (foundUser.password !== password) {
-        return { success: false, error: 'Invalid password' }
-      }
-
-      setCurrentUser(foundUser)
-      localStorage.setItem('currentUser', JSON.stringify(foundUser))
-      setShowLoginForm(false) 
-      return { success: true }
-    } catch (error) {
-      return { success: false, error: 'Login failed. Please try again.' }
-    } finally {
-      setIsAuthLoading(false)
+    const foundUser = await userAPI.getUserByEmail(email)
+    
+    if (!foundUser || foundUser.password !== password) {
+      return { success: false, error: 'Invalid credentials' }
     }
-  }
 
+    setCurrentUser(foundUser)
+    localStorage.setItem('currentUser', JSON.stringify(foundUser))
+    setShowLoginForm(false)
+    return { success: true }
+  }
 
   const handleRegister = async (userData: Omit<User, 'id'>): Promise<{ success: boolean; error?: string }> => {
-    try {
-      setIsAuthLoading(true)
-      
-
-      const existingUser = await userAPI.getUserByEmail(userData.email)
-      if (existingUser) {
-        return { success: false, error: 'Email already registered' }
-      }
-
-      const newUser = await userAPI.createUser(userData)
-      setCurrentUser(newUser)
-      localStorage.setItem('currentUser', JSON.stringify(newUser))
-      setShowRegForm(false)
-      return { success: true }
-    } catch (error) {
-      return { success: false, error: 'Registration failed. Please try again.' }
-    } finally {
-      setIsAuthLoading(false)
+    const existingUser = await userAPI.getUserByEmail(userData.email)
+    if (existingUser) {
+      return { success: false, error: 'Email already registered' }
     }
-  }
 
+    const newUser = await userAPI.createUser(userData)
+    setCurrentUser(newUser)
+    localStorage.setItem('currentUser', JSON.stringify(newUser))
+    setShowRegForm(false)
+    return { success: true }
+  }
 
   const handleLogout = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
-  }
-
-
-  const isAuthenticated = !!currentUser
-
-  if (isAuthLoading) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontSize: '18px'
-      }}>
-        Loading...
-      </div>
-    )
   }
 
   return (
@@ -137,29 +78,28 @@ function App() {
           currentUser={currentUser}
           onLogout={handleLogout}
         />
+        
         <Routes>
-          <Route index element={
-            <Home 
+          <Route path="/" element={
+            <LandingPage 
               showLoginForm={() => setShowLoginForm(true)} 
               showRegisterForm={() => setShowRegForm(true)}
-              isAuthenticated={isAuthenticated}
-              currentUser={currentUser}
             />
           } />
-          <Route path="*" element={<NotFound />} />
-          <Route path="contact-us" element={<ContactUs/>} />
-          <Route path="Login" element={<Login close={() => close()} isVisible onLogin={handleLogin} />} />
-          <Route path="Register" element={<Register close={() => close()} isVisible onRegister={handleRegister} />} />
-          <Route path="Landing-Page" element={<LandingPage/>} />
           
-
-          {isAuthenticated && (
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/login" element={<Login close={() => setShowLoginForm(false)} isVisible={true} onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register close={() => setShowRegForm(false)} isVisible={true} onRegister={handleRegister} />} />
+          
+          {currentUser && (
             <>
-              <Route path="dashboard" element={<div>Dashboard - User Jobs Here</div>} />
-              <Route path="jobs/:jobId" element={<div>Job Detail Page</div>} />
-              <Route path="add-job" element={<div>Add Job Form</div>} />
+              <Route path="/dashboard" element={<Dashboard currentUser={currentUser} />} />
+              <Route path="/jobs/:jobId" element={<JobDetails />} />
+              <Route path="/add-job" element={<AddJob currentUser={currentUser} />} />
             </>
           )}
+          
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
