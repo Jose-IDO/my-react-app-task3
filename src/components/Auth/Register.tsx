@@ -1,41 +1,82 @@
-import React, { useRef } from 'react'
+
+import React, { useState } from 'react'
 import styles from './Auth.module.css'
 import { Overlay } from '../Overlay/Overlay'
 import { Text } from '../Text/Text'
 import { TextInput } from '../Inputs/TextInput'
 import { Button } from '../Inputs/Button'
 
-type RegisterOverlayProps = {
+type RegisterProps = {
     close: () => void,
-    isVisible: boolean
+    isVisible: boolean,
+    onRegister: (userData: any) => Promise<{ success: boolean; error?: string }>
 }
-export const Register: React.FC<RegisterOverlayProps> = ({ close, isVisible }) => {
-    // use ref hook, replaces document.getElementById()
-    const nameRef = useRef<HTMLInputElement>(null)
 
-    const handleSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        console.log(nameRef.current?.value);
-        // continued logic ...
+export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister }) => {
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleSubmit = async () => {
+        setError('')
+
+        if (!username || !email || !password) {
+            setError('Please fill in all fields')
+            return
+        }
+
+        if (!email.includes('@')) {
+            setError('Please enter a valid email')
+            return
+        }
+
+        const userData = {
+            username,
+            email,
+            password
+        }
+
+        const result = await onRegister(userData)
+        if (!result.success) {
+            setError(result.error || 'Registration failed')
+        }
     }
-    if(!isVisible) return null
+
+    if (!isVisible) return null
+
     return (
         <Overlay close={close}>
-            <form className={styles['auth-container']}>
+            <div className={styles['auth-container']}>
                 <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)' }}>Register</Text>
-                <TextInput ref={nameRef} label='Name' name="firstName" onChange={(ev) => { }} />
-                <TextInput label='Surname' name="surname" onChange={(ev) => { }} />
-                <TextInput label='Phone Number' name="phoneNumber" onChange={(ev) => { }} />
+                
+                {error && (
+                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px' }}>
+                        {error}
+                    </Text>
+                )}
+                
+                <TextInput 
+                    label='Username' 
+                    onChange={(ev) => setUsername(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='Email' 
+                    onChange={(ev) => setEmail(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='Password' 
+                    onChange={(ev) => setPassword(ev.target.value)}
+                />
 
-                <TextInput label='Email Address' name="emailAddress" onChange={(ev) => { }} />
-                <TextInput label='Password' name="password" onChange={(ev) => { }} />
-                <TextInput label='Password' name="confirmpassword" onChange={(ev) => { }} />
-
-                <Button value={'Register'} style={{ marginTop: 20 }} type='submit' onClick={handleSubmit}/>
-                <Text variant={'span'} style={{ fontSize: 14, textAlign: 'center', color: 'rgb(20, 20, 20)' }}>
-                    By signing up, you accept our <Text variant={'span'} style={{ color: 'rgb(10, 130, 150)' }}>Terms and conditions</Text>
-                </Text>
-            </form>
+                <Button 
+                    value="Register" 
+                    style={{ marginTop: 20 }} 
+                    onClick={handleSubmit}
+                />
+            </div>
         </Overlay>
     )
 }

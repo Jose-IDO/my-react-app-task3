@@ -7,7 +7,7 @@ export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Check if user is logged in on component mount
+ 
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {

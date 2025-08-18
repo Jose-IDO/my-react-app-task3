@@ -1,4 +1,4 @@
-// Updated App.tsx with authentication using useState
+
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Navbar } from './components/Navbar/Navbar'
@@ -26,14 +26,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [isAuthLoading, setIsAuthLoading] = useState(true)
   
-  // Modal states
+
   const [isLoginFormVisible, setShowLoginForm] = useState(false)
   const [isRegFormVisible, setShowRegForm] = useState(false)
   
-  // Other existing states
+
   const [cart, setCart] = useState<Product[]>([])
 
-  // Check if user is logged in on app start
+
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser')
     if (savedUser) {
@@ -46,7 +46,7 @@ function App() {
     setIsAuthLoading(false)
   }, [])
 
-  // Login function
+
   const handleLogin = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsAuthLoading(true)
@@ -62,7 +62,7 @@ function App() {
 
       setCurrentUser(foundUser)
       localStorage.setItem('currentUser', JSON.stringify(foundUser))
-      setShowLoginForm(false) // Close login modal
+      setShowLoginForm(false) 
       return { success: true }
     } catch (error) {
       return { success: false, error: 'Login failed. Please try again.' }
@@ -71,12 +71,12 @@ function App() {
     }
   }
 
-  // Register function
+
   const handleRegister = async (userData: Omit<User, 'id'>): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsAuthLoading(true)
       
-      // Check if user already exists
+
       const existingUser = await userAPI.getUserByEmail(userData.email)
       if (existingUser) {
         return { success: false, error: 'Email already registered' }
@@ -85,7 +85,7 @@ function App() {
       const newUser = await userAPI.createUser(userData)
       setCurrentUser(newUser)
       localStorage.setItem('currentUser', JSON.stringify(newUser))
-      setShowRegForm(false) // Close register modal
+      setShowRegForm(false)
       return { success: true }
     } catch (error) {
       return { success: false, error: 'Registration failed. Please try again.' }
@@ -94,13 +94,13 @@ function App() {
     }
   }
 
-  // Logout function
+
   const handleLogout = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
   }
 
-  // Check if user is authenticated
+
   const isAuthenticated = !!currentUser
 
   if (isAuthLoading) {
@@ -152,7 +152,7 @@ function App() {
           <Route path="Register" element={<Register close={() => close()} isVisible onRegister={handleRegister} />} />
           <Route path="Landing-Page" element={<LandingPage/>} />
           
-          {/* Protected routes - only show if authenticated */}
+
           {isAuthenticated && (
             <>
               <Route path="dashboard" element={<div>Dashboard - User Jobs Here</div>} />
