@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import styles from './Search.module.css'
 import { Text } from '../Text/Text'
-import searchIcon from '../../assets/search.png'
 
-export const Searchbar = () => {
+export const Searchbar: React.FC = () => {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/dashboard?search=${encodeURIComponent(searchQuery.trim())}`)
+    } else {
+      navigate('/dashboard')
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  }
+
   return (
     <div className={styles['search-bar']}>
-        <Text variant={'span'} style={{ color: 'rgb(20, 20, 20)', padding: 10 }}>Search</Text>
-        <input type='text' className={styles['search-input']} />
-        <img src={searchIcon} alt='search icon on search bar' className={styles['search-icon']}/>
-    </div>
-  )
-}
+      <Text variant={'span'} style={{ color: 'rgb(20, 20, 20)', padding
