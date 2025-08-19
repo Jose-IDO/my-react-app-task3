@@ -44,4 +44,4 @@ export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name,
         </div>
 
     )
-}git add
+}
