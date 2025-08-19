@@ -1,4 +1,30 @@
 {
-  "users": [],
-  "jobs": []
+  "users": [
+    {
+      "id": "1755571570036",
+      "username": "KingID",
+      "email": "joeyidowu1996@gmail.com",
+      "password": "PBHSmatric1996"
+    },
+    {
+      "id": "1755573093090",
+      "username": "josephID",
+      "email": "joseph.f.idowu@gmail.com",
+      "password": "PBHSmatric1996"
+    }
+  ],
+  "jobs": [
+    {
+      "companyName": "merclinco",
+      "role": "fkjg",
+      "status": "Interviewed",
+      "dateApplied": "2025-08-19",
+      "jobDuties": "sdfsdf",
+      "requirements": "dvfasdf",
+      "companyAddress": "dfsdf",
+      "contactDetails": "dfvgsdvf",
+      "notes": "gasfgas",
+      "id": "1755573129473"
+    }
+  ]
 }
