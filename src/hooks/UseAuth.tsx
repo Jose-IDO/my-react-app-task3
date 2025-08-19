@@ -1,7 +1,7 @@
 // src/hooks/useAuth.ts - Custom hook for authentication logic
 import { useState, useEffect } from 'react';
 import type { User } from '../types/Job';
-import { userAPI } from '../services/api';
+import { userAPI } from '../services/Api';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);

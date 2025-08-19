@@ -10,7 +10,35 @@
     height: fit-content;
     width: 70%;
     margin: auto;
-
-
 }
 
+@media (max-width: 1024px) {
+    .modcolorone {
+        width: 80%;
+        padding: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modcolorone {
+        width: 90%;
+        padding: 15px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modcolorone {
+        width: 95%;
+        padding: 12px;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 320px) {
+    .modcolorone {
+        width: 98%;
+        padding: 10px;
+        border-radius: 4px;
+    }
+}

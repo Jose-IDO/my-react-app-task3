@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { jobAPI } from '../services/api'
+import { jobAPI } from '../services/Api'
 import type { Job, JobStatus, JobFormData } from '../types/Job'
 import { Whitebox } from '../components/Whitebox/Whitebox'
 import { Text } from '../components/Text/Text'

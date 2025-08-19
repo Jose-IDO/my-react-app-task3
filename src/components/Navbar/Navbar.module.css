@@ -1,30 +1,20 @@
 nav {
     position: fixed;
     top: 0;
-    height: 60px;
+    height: 100px;
     width: 100vw;
     background: linear-gradient(to right, #2c5853, #fab449);
-
-    height: 100px;
-  width: 100%;
-  flex-direction: row;
-  /* background: linear-gradient(to right, #d96614, #164437); */
-
-  
-  z-index: 1000;
+    z-index: 1000;
 }
 
- .logo-container{
-        display: flex;
+.logo-container{
+    display: flex;
     align-items: center;
-    /* gap: 20px; */
     width: 30%;
     justify-content: space-between;
-
 }
 
 .navbar-links{
-
     display: flex;
     align-items: center;
     gap: 20px;
@@ -33,45 +23,44 @@ nav {
     padding-top: 15px;
 }
 
-
 .content {
     max-width: 90%;
     margin: auto;
-    /* padding: 10px; */
-    /* background-color: red; */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%;
 }
+
 .links {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .link {
     text-decoration: none;
     color: white;
     padding: 5px 10px;
     cursor: pointer;
     font-size: 30px;
-
 }
+
 .link:hover {
     color: rgb(220, 220, 220);
     background: linear-gradient(to right, #3a7475, #fdba3f);
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
     transform: translateY(-3px)
-
-    
 }
 
 .shopping-cart-icon {
     height: 20px;
-    height: 20px;
+    width: 20px;
     padding: 10px 20px;
     cursor: pointer;
 }
+
 .profile-icon {
     height: 40px;
     width: 40px;
@@ -81,4 +70,77 @@ nav {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .link {
+        font-size: 24px;
+        padding: 3px 8px;
+    }
+    .navbar-links {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        height: 80px;
+    }
+    .link {
+        font-size: 18px;
+        padding: 2px 6px;
+    }
+    .navbar-links {
+        gap: 10px;
+        padding-top: 10px;
+        flex-wrap: wrap;
+    }
+    .logo-container h2 {
+        font-size: 28px !important;
+    }
+    .profile-icon {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        height: 70px;
+    }
+    .content {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+    .logo-container {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    .logo-container h2 {
+        font-size: 20px !important;
+    }
+    .navbar-links {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+        padding-top: 0;
+    }
+    .link {
+        font-size: 14px;
+        padding: 1px 4px;
+    }
+    .profile-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 320px) {
+    .link {
+        font-size: 12px;
+        padding: 1px 2px;
+    }
+    .logo-container h2 {
+        font-size: 16px !important;
+    }
 }

@@ -5,7 +5,7 @@ import { Footer } from './components/Footer/Footer'
 import { Routes, Route } from 'react-router'
 import type { User } from './types/Job'
 import { userAPI } from './services/Api'
-
+import { ProtectedRoute } from './components/ProtectedRoute'
 import { LandingPage } from './pages/Landingpage'
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
@@ -92,13 +92,23 @@ function App() {
           <Route path="/login" element={<Login close={() => setShowLoginForm(false)} isVisible={true} onLogin={handleLogin} />} />
           <Route path="/register" element={<Register close={() => setShowRegForm(false)} isVisible={true} onRegister={handleRegister} />} />
           
-          {currentUser && (
-            <>
-              <Route path="/dashboard" element={<Dashboard currentUser={currentUser} />} />
-              <Route path="/jobs/:jobId" element={<JobDetails />} />
-              <Route path="/add-job" element={<AddJob currentUser={currentUser} />} />
-            </>
-          )}
+          <Route path="/dashboard" element={
+            <ProtectedRoute isAuthenticated={!!currentUser}>
+              <Dashboard currentUser={currentUser!} />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/jobs/:jobId" element={
+            <ProtectedRoute isAuthenticated={!!currentUser}>
+              <JobDetails />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/add-job" element={
+            <ProtectedRoute isAuthenticated={!!currentUser}>
+              <AddJob currentUser={currentUser!} />
+            </ProtectedRoute>
+          } />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
