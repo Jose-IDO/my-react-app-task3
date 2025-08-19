@@ -13,11 +13,11 @@ export const ContactUsForm: React.FC<Props> = ({ handleSubmit }) => {
             <form className={styles['contact-us']}>
                 <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)', margin: 0 }}>Have a query to report or question to ask?</Text>
                 <Text variant={'h1'} style={{ color: 'rgb(20, 20, 20)', margin: 0 }}>Send us an email</Text>
-                <TextInput label='Name' name="firstName" onChange={(ev) => { }} />
-                <TextInput label='Surname' name="surname" onChange={(ev) => { }} />
-                <TextInput label='Phone Number' name="phoneNumber" onChange={(ev) => { }} />
-                <TextInput label='Email Address' name="emailAddress" onChange={(ev) => { }} />
-                <TextInput label='Message' type='textarea' name="message" onChange={(ev) => { }} />
+                <TextInput label='Name' name="firstName" onChange={() => { }} />
+                <TextInput label='Surname' name="surname" onChange={() => { }} />
+                <TextInput label='Phone Number' name="phoneNumber" onChange={() => { }} />
+                <TextInput label='Email Address' name="emailAddress" onChange={() => { }} />
+                <TextInput label='Message' type='textarea' name="message" onChange={() => { }} />
                 <Button value={'Send Email'} style={{ marginTop: 20 }} type='submit' onClick={handleSubmit} />
             </form>
         </div>

@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { Navbar } from '../components/Navbar/Navbar'
 import {Whitebox} from '../components/Whitebox/Whitebox'
 import styles from '../components/Page styling/home.module.css'

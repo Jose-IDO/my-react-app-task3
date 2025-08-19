@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Text } from '../Text/Text'
 import styles from './NotFound.module.css'
 import { Whitebox } from '../Whitebox/Whitebox'

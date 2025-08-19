@@ -13,8 +13,8 @@ type NavbarProps = {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
-    showLoginForm, 
-    showRegisterForm, 
+    // showLoginForm, 
+    // showRegisterForm, 
     currentUser,
     onLogout 
 }) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Whitebox } from '../components/Whitebox/Whitebox'
 
 export const AboutUs = () => {
