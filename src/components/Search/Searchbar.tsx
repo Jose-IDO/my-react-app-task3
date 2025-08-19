@@ -24,4 +24,24 @@ export const Searchbar: React.FC = () => {
 
   return (
     <div className={styles['search-bar']}>
-      <Text variant={'span'} style={{ color: 'rgb(20, 20, 20)', padding
+      <Text variant={'span'} style={{ color: 'rgb(20, 20, 20)', padding: '0 10px' }}>
+        Search:
+      </Text>
+      <input
+        className={styles['search-input']}
+        type="text"
+        placeholder="Search by company or role..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyPress={handleKeyPress}
+      />
+      <button 
+        className={styles['search-icon']} 
+        onClick={handleSearch}
+        type="button"
+      >
+        Search
+      </button>
+    </div>
+  )
+}
