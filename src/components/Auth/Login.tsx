@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import styles from './Auth.module.css'
 import { Overlay } from '../Overlay/Overlay'
@@ -46,11 +45,15 @@ export const Login: React.FC<LoginProps> = ({ close, isVisible, onLogin }) => {
                 
                 <TextInput 
                     label="Email" 
+                    type="email"
+                    value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                 />
                 
                 <TextInput 
                     label="Password" 
+                    type="password"
+                    value={password}
                     onChange={(ev) => setPassword(ev.target.value)} 
                 />
                 
