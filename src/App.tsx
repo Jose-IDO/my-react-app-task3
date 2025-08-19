@@ -4,7 +4,7 @@ import { Navbar } from './components/Navbar/Navbar'
 import { Footer } from './components/Footer/Footer'
 import { Routes, Route } from 'react-router'
 import type { User } from './types/Job'
-import { userAPI } from './services/api'
+import { userAPI } from './services/Api'
 
 import { LandingPage } from './pages/Landingpage'
 import { Login } from './components/Auth/Login'
