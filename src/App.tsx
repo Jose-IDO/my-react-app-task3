@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router'
 import type { User } from './types/Job'
 import { userAPI } from './services/api'
 
-import { LandingPage } from './pages/LandingPage'
+import { LandingPage } from './pages/Landingpage'
 import { Login } from './components/Auth/Login'
 import { Register } from './components/Auth/Register'
 import { Dashboard } from './pages/Dashboard'
@@ -84,6 +84,7 @@ function App() {
             <LandingPage 
               showLoginForm={() => setShowLoginForm(true)} 
               showRegisterForm={() => setShowRegForm(true)}
+              isAuthenticated={!!currentUser}
             />
           } />
           
