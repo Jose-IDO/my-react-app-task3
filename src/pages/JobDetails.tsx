@@ -51,11 +51,9 @@ export const JobDetails: React.FC = () => {
           notes: jobData.notes || ''
         })
       } else {
-        // Job not found, redirect to 404
         navigate('/not-found', { replace: true })
       }
     } catch (error) {
-      // Error loading job, redirect to 404
       navigate('/not-found', { replace: true })
     } finally {
       setIsLoading(false)

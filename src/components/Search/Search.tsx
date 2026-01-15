@@ -1,4 +1,3 @@
-// import React from 'react'
 import { ContentContainer } from '../ContentContainer'
 import styles from './Search.module.css'
 import { Searchbar} from './Searchbar'

@@ -1,4 +1,3 @@
-// src/hooks/useAuth.ts - Custom hook for authentication logic
 import { useState, useEffect } from 'react';
 import type { User } from '../types/Job';
 import { userAPI } from '../services/Api';
@@ -47,7 +46,6 @@ export const useAuth = () => {
     try {
       setIsLoading(true);
       
-      // Check if user already exists
       const existingUser = await userAPI.getUserByEmail(userData.email);
       if (existingUser) {
         return { success: false, error: 'Email already registered' };

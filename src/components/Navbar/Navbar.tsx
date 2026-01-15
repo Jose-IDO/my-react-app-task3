@@ -12,8 +12,6 @@ type NavbarProps = {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
-    // showLoginForm, 
-    // showRegisterForm, 
     currentUser,
     onLogout 
 }) => {

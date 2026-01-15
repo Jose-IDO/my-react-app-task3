@@ -1,4 +1,3 @@
-// src/pages/LandingPage.tsx
 import React from 'react'
 import { Whitebox } from '../components/Whitebox/Whitebox'
 import styles from '../components/Page styling/home.module.css'
@@ -17,14 +16,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     showRegisterForm, 
     isAuthenticated 
 }) => {
-    // If user is already logged in, redirect to dashboard
     if (isAuthenticated) {
         return <Navigate to="/dashboard" replace />
     }
 
     return (
-        <>            
-            <div style={{ marginTop: '120px' }}> 
+        <div style={{ marginTop: '120px' }}> 
                 <Whitebox modcolor='modcolorone'>
                     <div>
                         <h1 className={styles.h1}>WELCOME TO JOBSEEK!</h1> 
@@ -53,7 +50,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                         </div>
                     </div>
                 </Whitebox>
-            </div>
-        </>
+        </div>
     )
 }
