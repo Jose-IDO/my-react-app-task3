@@ -4,13 +4,13 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1000;
+    z-index: 1001;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: rgba(0, 0, 0, 0.6);
     overflow-y: auto;
-    padding: 20px;
+    padding: 120px 20px 20px 20px;
 }
 
 .overlay-child {
@@ -21,8 +21,8 @@
     width: 100%;
     max-width: 100%;
     margin: auto;
-    padding-top: 40px;
-    min-height: 100%;
+    padding-top: 0;
+    min-height: auto;
 }
 
 .close-icon {

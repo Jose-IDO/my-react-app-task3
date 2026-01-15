@@ -3,7 +3,7 @@
     width: 100%;
     max-width: 600px;
     min-height: auto;
-    max-height: 90vh;
+    max-height: calc(100vh - 140px);
     border-radius: 12px;
     padding: 50px 35px 30px 35px;
     display: flex;
@@ -11,7 +11,7 @@
     gap: 15px;
     overflow-y: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    margin: auto;
+    margin: 0 auto;
     position: relative;
 }
 
@@ -70,12 +70,16 @@
 }
 
 @media (max-width: 768px) {
+    .overlay {
+        padding: 100px 20px 20px 20px;
+    }
+    
     .auth-container {
         width: 95%;
         max-width: 550px;
         padding: 45px 25px 25px 25px;
         gap: 12px;
-        max-height: 95vh;
+        max-height: calc(100vh - 120px);
     }
     
     .auth-container h2 {
@@ -84,10 +88,6 @@
     
     .auth-container h1 {
         font-size: 18px;
-    }
-    
-    .overlay-child {
-        padding-top: 30px;
     }
     
     .close-icon {
@@ -100,20 +100,20 @@
 }
 
 @media (max-width: 480px) {
+    .overlay {
+        padding: 90px 15px 15px 15px;
+    }
+    
     .auth-container {
         width: 95%;
         max-width: 100%;
         padding: 40px 20px 20px 20px;
         gap: 10px;
-        max-height: 95vh;
+        max-height: calc(100vh - 110px);
     }
     
     .auth-container h2 {
         font-size: 18px;
-    }
-    
-    .overlay-child {
-        padding-top: 25px;
     }
     
     .close-icon {
