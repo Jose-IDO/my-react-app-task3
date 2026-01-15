@@ -101,8 +101,8 @@ function App() {
           } />
           
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/login" element={<Login close={() => setShowLoginForm(false)} isVisible={true} onLogin={handleLogin} />} />
-          <Route path="/register" element={<Register close={() => setShowRegForm(false)} isVisible={true} onRegister={handleRegister} />} />
+          <Route path="/login" element={<Login close={() => setShowLoginForm(false)} isVisible={true} onLogin={handleLogin} isPage={true} />} />
+          <Route path="/register" element={<Register close={() => setShowRegForm(false)} isVisible={true} onRegister={handleRegister} isPage={true} />} />
           
           <Route path="/dashboard" element={
             <ProtectedRoute isAuthenticated={!!currentUser}>

@@ -15,6 +15,38 @@
     position: relative;
 }
 
+.close-icon {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    z-index: 1002;
+    transition: background-color 0.2s ease;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    pointer-events: auto;
+}
+
+.close-icon:hover {
+    background-color: #d32f2f;
+}
+
+.close-icon:active {
+    background-color: #b71c1c;
+}
+
 .auth-container h2 {
     font-size: 24px;
     font-weight: 600;
