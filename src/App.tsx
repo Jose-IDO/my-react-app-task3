@@ -37,6 +37,7 @@ function App() {
     setCurrentUser(foundUser)
     localStorage.setItem('currentUser', JSON.stringify(foundUser))
     setShowLoginForm(false)
+    setShowRegForm(false)
     return { success: true }
   }
 
@@ -50,7 +51,18 @@ function App() {
     setCurrentUser(newUser)
     localStorage.setItem('currentUser', JSON.stringify(newUser))
     setShowRegForm(false)
+    setShowLoginForm(false)
     return { success: true }
+  }
+
+  const handleShowLogin = () => {
+    setShowLoginForm(true)
+    setShowRegForm(false)
+  }
+
+  const handleShowRegister = () => {
+    setShowRegForm(true)
+    setShowLoginForm(false)
   }
 
   const handleLogout = () => {
@@ -73,8 +85,8 @@ function App() {
 
       <div id='scrollable'>
         <Navbar 
-          showLoginForm={() => setShowLoginForm(true)} 
-          showRegisterForm={() => setShowRegForm(true)}
+          showLoginForm={handleShowLogin} 
+          showRegisterForm={handleShowRegister}
           currentUser={currentUser}
           onLogout={handleLogout}
         />
@@ -82,8 +94,8 @@ function App() {
         <Routes>
           <Route path="/" element={
             <LandingPage 
-              showLoginForm={() => setShowLoginForm(true)} 
-              showRegisterForm={() => setShowRegForm(true)}
+              showLoginForm={handleShowLogin} 
+              showRegisterForm={handleShowRegister}
               isAuthenticated={!!currentUser}
             />
           } />
