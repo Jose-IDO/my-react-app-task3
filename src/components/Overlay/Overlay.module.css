@@ -34,14 +34,19 @@
     cursor: pointer;
     background-color: #f44336;
     color: white;
+    border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
     font-weight: bold;
-    z-index: 1001;
+    z-index: 1002;
     transition: background-color 0.2s ease;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    pointer-events: auto;
 }
 
 .close-icon:hover {

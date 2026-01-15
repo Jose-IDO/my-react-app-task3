@@ -10,7 +10,8 @@ export const Overlay: React.FC<OverlayProps> = ({ children, close }) => {
         e.stopPropagation()
     }
     
-    const handleCloseClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleCloseClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         e.stopPropagation()
         close()
     }
@@ -18,9 +19,14 @@ export const Overlay: React.FC<OverlayProps> = ({ children, close }) => {
     return (
         <div className={styles['overlay']} onClick={close}>
             <div className={styles['overlay-child']} onClick={stopProgation}>
-                <div className={styles['close-icon']} onClick={handleCloseClick}>
+                <button 
+                    type="button"
+                    className={styles['close-icon']} 
+                    onClick={handleCloseClick}
+                    aria-label="Close"
+                >
                     ×
-                </div>
+                </button>
                 {children}
             </div>
         </div>
