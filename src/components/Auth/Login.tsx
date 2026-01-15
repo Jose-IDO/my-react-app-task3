@@ -45,14 +45,16 @@ export const Login: React.FC<LoginProps> = ({ close, isVisible, onLogin, isPage 
 
     const content = (
         <div className={styles['auth-container']}>
-            <button 
-                type="button"
-                className={styles['close-icon']} 
-                onClick={handleClose}
-                aria-label="Close"
-            >
-                ×
-            </button>
+            {isPage && (
+                <button 
+                    type="button"
+                    className={styles['close-icon']} 
+                    onClick={handleClose}
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+            )}
             <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)', fontSize: '24px', fontWeight: '600', marginBottom: '10px', textAlign: 'center' }}>Login</Text> 
             
             {error && (
