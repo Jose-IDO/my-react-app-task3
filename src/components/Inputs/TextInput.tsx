@@ -15,23 +15,54 @@ export type TextInputProps = {
 }
 
 export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name, onChange, id, error, ref, type, inputMode }) => {
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let processedValue = e.target.value
+        
+        // Phone number validation - only numbers, +, -, spaces, parentheses
         if (type === 'tel' || name?.toLowerCase().includes('phone')) {
-            const phoneValue = e.target.value.replace(/[^0-9+\-\s()]/g, '')
-            const syntheticEvent = {
-                ...e,
-                target: { ...e.target, value: phoneValue }
-            } as React.ChangeEvent<HTMLInputElement>
-            onChange(syntheticEvent)
-        } else {
-            onChange(e)
+            processedValue = processedValue.replace(/[^0-9+\-\s()]/g, '')
         }
+        // Numeric input - only numbers (for inputMode numeric)
+        else if (inputMode === 'numeric' || type === 'number') {
+            processedValue = processedValue.replace(/[^0-9]/g, '')
+        }
+        // Decimal input - numbers and decimal point
+        else if (inputMode === 'decimal') {
+            processedValue = processedValue.replace(/[^0-9.]/g, '')
+            // Ensure only one decimal point
+            const parts = processedValue.split('.')
+            if (parts.length > 2) {
+                processedValue = parts[0] + '.' + parts.slice(1).join('')
+            }
+        }
+        // Email validation - basic character filtering
+        else if (type === 'email' || name?.toLowerCase().includes('email')) {
+            // Allow email-valid characters
+            processedValue = processedValue.replace(/[^a-zA-Z0-9@._+-]/g, '')
+        }
+        // Text fields - allow letters, numbers, spaces, and common punctuation
+        else if (type === 'text' || !type) {
+            // Allow letters, numbers, spaces, and common punctuation for names/text
+            if (name?.toLowerCase().includes('name') || name?.toLowerCase().includes('username')) {
+                // For names, allow letters, spaces, hyphens, apostrophes
+                processedValue = processedValue.replace(/[^a-zA-Z\s'-]/g, '')
+            }
+        }
+        
+        // Create synthetic event with processed value
+        const syntheticEvent = {
+            ...e,
+            target: { ...e.target, value: processedValue }
+        } as React.ChangeEvent<HTMLInputElement>
+        
+        onChange(syntheticEvent)
     }
 
     const getInputType = () => {
         if (type) return type
         if (name?.toLowerCase().includes('phone')) return 'tel'
         if (name?.toLowerCase().includes('email')) return 'email'
+        if (name?.toLowerCase().includes('number') && !name?.toLowerCase().includes('phone')) return 'number'
         return 'text'
     }
 
@@ -39,6 +70,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name,
         if (inputMode) return inputMode
         if (name?.toLowerCase().includes('phone')) return 'tel'
         if (name?.toLowerCase().includes('email')) return 'email'
+        if (name?.toLowerCase().includes('number') && !name?.toLowerCase().includes('phone')) return 'numeric'
         return undefined
     }
 
@@ -65,8 +97,9 @@ export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name,
                         inputMode={getInputMode()}
                         name={name} 
                         value={value} 
-                        onChange={handlePhoneChange} 
-                        className={styles.input} 
+                        onChange={handleInputChange} 
+                        className={styles.input}
+                        pattern={type === 'email' ? '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$' : undefined}
                     />
                 )
             }

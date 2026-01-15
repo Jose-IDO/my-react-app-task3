@@ -74,6 +74,7 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
                 
                 <TextInput 
                     label='Username *' 
+                    name="username"
                     value={username}
                     onChange={(ev) => setUsername(ev.target.value)}
                 />
@@ -101,12 +102,14 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
                 
                 <TextInput 
                     label='First Name' 
+                    name="firstName"
                     value={firstName}
                     onChange={(ev) => setFirstName(ev.target.value)}
                 />
                 
                 <TextInput 
                     label='Last Name' 
+                    name="lastName"
                     value={lastName}
                     onChange={(ev) => setLastName(ev.target.value)}
                 />
