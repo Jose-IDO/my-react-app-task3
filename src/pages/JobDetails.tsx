@@ -13,6 +13,7 @@ export const JobDetails: React.FC = () => {
   const navigate = useNavigate()
   
   const [job, setJob] = useState<Job | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [editFormData, setEditFormData] = useState<JobFormData>({
     companyName: '',
@@ -33,20 +34,31 @@ export const JobDetails: React.FC = () => {
   }, [jobId])
 
   const loadJob = async () => {
-    const jobData = await jobAPI.getJobById(jobId!)
-    setJob(jobData)
-    if (jobData) {
-      setEditFormData({
-        companyName: jobData.companyName,
-        role: jobData.role,
-        status: jobData.status,
-        dateApplied: jobData.dateApplied,
-        jobDuties: jobData.jobDuties || '',
-        requirements: jobData.requirements || '',
-        companyAddress: jobData.companyAddress || '',
-        contactDetails: jobData.contactDetails || '',
-        notes: jobData.notes || ''
-      })
+    setIsLoading(true)
+    try {
+      const jobData = await jobAPI.getJobById(jobId!)
+      if (jobData) {
+        setJob(jobData)
+        setEditFormData({
+          companyName: jobData.companyName,
+          role: jobData.role,
+          status: jobData.status,
+          dateApplied: jobData.dateApplied,
+          jobDuties: jobData.jobDuties || '',
+          requirements: jobData.requirements || '',
+          companyAddress: jobData.companyAddress || '',
+          contactDetails: jobData.contactDetails || '',
+          notes: jobData.notes || ''
+        })
+      } else {
+        // Job not found, redirect to 404
+        navigate('/not-found', { replace: true })
+      }
+    } catch (error) {
+      // Error loading job, redirect to 404
+      navigate('/not-found', { replace: true })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -76,8 +88,16 @@ export const JobDetails: React.FC = () => {
     }
   }
 
+  if (isLoading) {
+    return (
+      <div style={{ marginTop: '120px', textAlign: 'center', padding: '40px' }}>
+        <Text variant="h2">Loading job details...</Text>
+      </div>
+    )
+  }
+
   if (!job) {
-    return <div style={{ marginTop: '120px' }}>Loading...</div>
+    return null // Will redirect to 404
   }
 
   return (
