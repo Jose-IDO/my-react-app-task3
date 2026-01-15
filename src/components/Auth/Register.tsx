@@ -64,10 +64,10 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
     return (
         <Overlay close={close}>
             <div className={styles['auth-container']}>
-                <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)' }}>Register</Text>
+                <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)', fontSize: '24px', fontWeight: '600', marginBottom: '10px', textAlign: 'center' }}>Register</Text>
                 
                 {error && (
-                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px' }}>
+                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px', marginBottom: '5px' }}>
                         {error}
                     </Text>
                 )}

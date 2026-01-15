@@ -35,10 +35,10 @@ export const Login: React.FC<LoginProps> = ({ close, isVisible, onLogin }) => {
     return (
         <Overlay close={close}>
             <div className={styles['auth-container']}>
-                <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)' }}>Login</Text> 
+                <Text variant={'h2'} style={{ color: 'rgb(20, 20, 20)', fontSize: '24px', fontWeight: '600', marginBottom: '10px', textAlign: 'center' }}>Login</Text> 
                 
                 {error && (
-                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px' }}>
+                    <Text variant={'span'} style={{ color: 'red', fontSize: '14px', marginBottom: '5px' }}>
                         {error}
                     </Text>
                 )}
