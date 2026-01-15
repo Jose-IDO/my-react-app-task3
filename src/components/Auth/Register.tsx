@@ -15,13 +15,27 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
 
     const handleSubmit = async () => {
         setError('')
 
         if (!username || !email || !password) {
-            setError('Please fill in all fields')
+            setError('Please fill in all required fields')
+            return
+        }
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match')
+            return
+        }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters')
             return
         }
 
@@ -33,7 +47,10 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
         const userData = {
             username,
             email,
-            password
+            password,
+            firstName: firstName || undefined,
+            lastName: lastName || undefined,
+            phoneNumber: phoneNumber || undefined
         }
 
         const result = await onRegister(userData)
@@ -56,23 +73,49 @@ export const Register: React.FC<RegisterProps> = ({ close, isVisible, onRegister
                 )}
                 
                 <TextInput 
-                    label='Username' 
+                    label='Username *' 
                     value={username}
                     onChange={(ev) => setUsername(ev.target.value)}
                 />
                 
                 <TextInput 
-                    label='Email' 
+                    label='Email *' 
                     type="email"
                     value={email}
                     onChange={(ev) => setEmail(ev.target.value)}
                 />
                 
                 <TextInput 
-                    label='Password' 
+                    label='Password *' 
                     type="password"
                     value={password}
                     onChange={(ev) => setPassword(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='Confirm Password *' 
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(ev) => setConfirmPassword(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='First Name' 
+                    value={firstName}
+                    onChange={(ev) => setFirstName(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='Last Name' 
+                    value={lastName}
+                    onChange={(ev) => setLastName(ev.target.value)}
+                />
+                
+                <TextInput 
+                    label='Phone Number' 
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(ev) => setPhoneNumber(ev.target.value)}
                 />
 
                 <Button 
