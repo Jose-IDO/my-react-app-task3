@@ -2,9 +2,7 @@ import styles from './Footer.module.css'
 
 export const Footer = () => {
   return (
-    <footer>
-        <div className={styles['footer-cont']}>
-        </div>
+    <footer className={styles.footer}>
     </footer>
   )
 }

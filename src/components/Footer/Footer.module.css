@@ -1,10 +1,7 @@
-footer {
+.footer {
     position: absolute;
     width: 100vw;
     height: 100px;
     bottom: 0;
     background: linear-gradient(to right, #2c5853, #fab449);
-}
-.footer-cont {
-    margin: auto;
 }
