@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import { Text } from './Text/Text';
 import { Whitebox } from './Whitebox/Whitebox';
 import { Buttons } from './button/Button';
