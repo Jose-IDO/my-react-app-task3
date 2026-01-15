@@ -60,11 +60,13 @@ export const AddJob: React.FC<AddJobProps> = ({ currentUser }) => {
           />
           
           <div style={{ marginBottom: '15px' }}>
-            <label style={{ color: 'rgb(20, 20, 20)', fontWeight: '500' }}>Status</label>
+            <label style={{ color: 'rgb(20, 20, 20)', fontWeight: '500', fontSize: '14px', display: 'block', marginBottom: '8px' }}>Status</label>
             <select
               value={formData.status}
               onChange={(e) => handleInputChange('status', e.target.value as JobStatus)}
-              style={{ padding: '10px', borderRadius: '4px', border: '1px solid rgb(20, 20, 20)', width: '100%' }}
+              style={{ padding: '10px', borderRadius: '6px', border: '1px solid #ddd', width: '100%', cursor: 'pointer', fontSize: '14px', transition: 'border-color 0.2s ease' }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3a7475'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = '#ddd'}
             >
               <option value="Applied">Applied</option>
               <option value="Interviewed">Interviewed</option>
@@ -112,7 +114,7 @@ export const AddJob: React.FC<AddJobProps> = ({ currentUser }) => {
             onChange={(e) => handleInputChange('notes', e.target.value)}
           />
 
-          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
+          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '30px', flexWrap: 'wrap' }}>
             <Buttons onClick={() => navigate('/dashboard')}>Cancel</Buttons>
             <Button value="Add Job Application" onClick={handleSubmit} />
           </div>

@@ -39,6 +39,7 @@ export const Searchbar: React.FC = () => {
         className={styles['search-icon']} 
         onClick={handleSearch}
         type="button"
+        aria-label="Search"
       >
         Search
       </button>

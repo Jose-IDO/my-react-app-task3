@@ -10,9 +10,38 @@ export type TextInputProps = {
     error?: string,
     name?: string,
     ref?: React.Ref<HTMLInputElement | null>,
-    type?: string
+    type?: string,
+    inputMode?: 'text' | 'tel' | 'email' | 'numeric' | 'decimal' | 'search' | 'url'
 }
-export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name, onChange, id, error, ref, type }) => {
+
+export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name, onChange, id, error, ref, type, inputMode }) => {
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (type === 'tel' || name?.toLowerCase().includes('phone')) {
+            const phoneValue = e.target.value.replace(/[^0-9+\-\s()]/g, '')
+            const syntheticEvent = {
+                ...e,
+                target: { ...e.target, value: phoneValue }
+            } as React.ChangeEvent<HTMLInputElement>
+            onChange(syntheticEvent)
+        } else {
+            onChange(e)
+        }
+    }
+
+    const getInputType = () => {
+        if (type) return type
+        if (name?.toLowerCase().includes('phone')) return 'tel'
+        if (name?.toLowerCase().includes('email')) return 'email'
+        return 'text'
+    }
+
+    const getInputMode = () => {
+        if (inputMode) return inputMode
+        if (name?.toLowerCase().includes('phone')) return 'tel'
+        if (name?.toLowerCase().includes('email')) return 'email'
+        return undefined
+    }
+
     return (
         <div className={styles['input-container']}>
             <label className={styles['input-label']}>{label}</label>
@@ -32,10 +61,11 @@ export const TextInput: React.FC<TextInputProps> = ({ label, style, value, name,
                         ref={ref} 
                         style={style} 
                         id={id} 
-                        type={type || 'text'} 
+                        type={getInputType()} 
+                        inputMode={getInputMode()}
                         name={name} 
                         value={value} 
-                        onChange={onChange} 
+                        onChange={handlePhoneChange} 
                         className={styles.input} 
                     />
                 )

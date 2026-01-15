@@ -1,30 +1,36 @@
 .h1{
-    font-size: 40px;
+    font-size: 28px;
     font-weight: 600;
     color: #060101;
     text-align: center;
     justify-content: center;
     display: flex;
     align-items: center;
+    margin: 10px 0;
+    line-height: 1.4;
 }
 
 .p{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     color: #060101;
     text-align: center;
     justify-content: center;
     display: flex;
     align-items: center;
+    margin: 8px 0;
+    line-height: 1.5;
+    padding: 0 20px;
 }
 
 .interactive-elements{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 100px;
+    gap: 40px;
     flex-direction: row;
-    padding-top: 100px;
+    padding-top: 40px;
+    flex-wrap: wrap;
 }
 
 .hometextbox {
@@ -33,62 +39,62 @@
 
 @media (max-width: 1200px) {
     .h1 {
-        font-size: 35px;
+        font-size: 24px;
     }
     .interactive-elements {
-        gap: 50px;
+        gap: 30px;
     }
 }
 
 @media (max-width: 1024px) {
     .h1 {
-        font-size: 30px;
+        font-size: 22px;
     }
     .p {
-        font-size: 18px;
+        font-size: 15px;
     }
     .interactive-elements {
-        gap: 30px;
+        gap: 25px;
     }
 }
 
 @media (max-width: 768px) {
     .h1 {
-        font-size: 25px;
+        font-size: 20px;
     }
     .p {
-        font-size: 16px;
+        font-size: 14px;
         padding: 0 15px;
     }
     .interactive-elements {
         flex-direction: column;
-        gap: 30px;
-        padding-top: 50px;
+        gap: 25px;
+        padding-top: 30px;
     }
 }
 
 @media (max-width: 480px) {
     .h1 {
-        font-size: 20px;
+        font-size: 18px;
         padding: 0 10px;
     }
     .p {
-        font-size: 14px;
+        font-size: 13px;
         padding: 0 10px;
     }
     .interactive-elements {
-        padding-top: 30px;
+        padding-top: 25px;
         gap: 20px;
     }
 }
 
 @media (max-width: 320px) {
     .h1 {
-        font-size: 18px;
+        font-size: 16px;
         padding: 0 5px;
     }
     .p {
-        font-size: 13px;
+        font-size: 12px;
         padding: 0 5px;
     }
     .interactive-elements {

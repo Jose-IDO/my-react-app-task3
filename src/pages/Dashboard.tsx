@@ -93,11 +93,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
 
 
           <div className={styles.controls}>
-            <TextInput
-              label="Search by company or role"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <div style={{ width: '100%', maxWidth: '500px' }}>
+              <TextInput
+                label="Search by company or role"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                type="search"
+              />
+            </div>
 
             <div className={styles.buttons}>
               <Buttons onClick={() => navigate('/add-job')}>Add Job</Buttons>
@@ -105,7 +108,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                style={{ padding: '10px', borderRadius: '5px' }}
+                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ddd', cursor: 'pointer', fontSize: '14px' }}
+                aria-label="Filter by status"
               >
                 <option value="all">All Statuses</option>
                 <option value="Applied">Applied</option>
@@ -116,7 +120,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                style={{ padding: '10px', borderRadius: '5px' }}
+                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ddd', cursor: 'pointer', fontSize: '14px' }}
+                aria-label="Sort order"
               >
                 <option value="desc">Newest First</option>
                 <option value="asc">Oldest First</option>

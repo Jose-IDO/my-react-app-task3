@@ -103,29 +103,29 @@ export const JobDetails: React.FC = () => {
                 </div>
               </div>
 
-              <p><strong>Date Applied:</strong> {new Date(job.dateApplied).toLocaleDateString()}</p>
-              {job.companyAddress && <p><strong>Address:</strong> {job.companyAddress}</p>}
-              {job.contactDetails && <p><strong>Contact:</strong> {job.contactDetails}</p>}
+              <Text variant="p" style={{ marginBottom: '10px' }}><strong>Date Applied:</strong> {new Date(job.dateApplied).toLocaleDateString()}</Text>
+              {job.companyAddress && <Text variant="p" style={{ marginBottom: '10px' }}><strong>Address:</strong> {job.companyAddress}</Text>}
+              {job.contactDetails && <Text variant="p" style={{ marginBottom: '10px' }}><strong>Contact:</strong> {job.contactDetails}</Text>}
               {job.jobDuties && (
-                <div>
-                  <Text variant="h2">Job Duties</Text>
-                  <p>{job.jobDuties}</p>
+                <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+                  <Text variant="h2" style={{ marginBottom: '10px' }}>Job Duties</Text>
+                  <Text variant="p">{job.jobDuties}</Text>
                 </div>
               )}
               {job.requirements && (
-                <div>
-                  <Text variant="h2">Requirements</Text>
-                  <p>{job.requirements}</p>
+                <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+                  <Text variant="h2" style={{ marginBottom: '10px' }}>Requirements</Text>
+                  <Text variant="p">{job.requirements}</Text>
                 </div>
               )}
               {job.notes && (
-                <div>
-                  <Text variant="h2">Notes</Text>
-                  <p>{job.notes}</p>
+                <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+                  <Text variant="h2" style={{ marginBottom: '10px' }}>Notes</Text>
+                  <Text variant="p">{job.notes}</Text>
                 </div>
               )}
 
-              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '40px' }}>
+              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '40px', flexWrap: 'wrap' }}>
                 <Buttons onClick={() => navigate('/dashboard')}>Back</Buttons>
                 <Buttons onClick={() => setIsEditing(true)}>Edit</Buttons>
                 <Buttons onClick={handleDelete}>Delete</Buttons>
@@ -148,11 +148,13 @@ export const JobDetails: React.FC = () => {
               />
               
               <div style={{ marginBottom: '15px' }}>
-                <label style={{ color: 'rgb(20, 20, 20)', fontWeight: '500' }}>Status</label>
+                <label style={{ color: 'rgb(20, 20, 20)', fontWeight: '500', fontSize: '14px', display: 'block', marginBottom: '8px' }}>Status</label>
                 <select
                   value={editFormData.status}
                   onChange={(e) => handleEditInputChange('status', e.target.value as JobStatus)}
-                  style={{ padding: '10px', borderRadius: '4px', border: '1px solid rgb(20, 20, 20)', width: '100%' }}
+                  style={{ padding: '10px', borderRadius: '6px', border: '1px solid #ddd', width: '100%', cursor: 'pointer', fontSize: '14px', transition: 'border-color 0.2s ease' }}
+                  onMouseEnter={(e) => e.currentTarget.style.borderColor = '#3a7475'}
+                  onMouseLeave={(e) => e.currentTarget.style.borderColor = '#ddd'}
                 >
                   <option value="Applied">Applied</option>
                   <option value="Interviewed">Interviewed</option>
@@ -200,7 +202,7 @@ export const JobDetails: React.FC = () => {
                 onChange={(e) => handleEditInputChange('notes', e.target.value)}
               />
 
-              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '30px' }}>
+              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '30px', flexWrap: 'wrap' }}>
                 <Buttons onClick={() => setIsEditing(false)}>Cancel</Buttons>
                 <Button value="Save Changes" onClick={handleSaveEdit} />
               </div>

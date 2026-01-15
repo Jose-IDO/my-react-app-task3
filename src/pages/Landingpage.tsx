@@ -43,12 +43,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                     <div className={styles['interactive-elements']}>
                         <div className={styles.hometextbox}>
-                            <Text variant={'h1'}>First time here? Register below</Text>
+                            <Text variant={'h2'} style={{ marginBottom: '15px', fontSize: '20px' }}>First time here? Register below</Text>
                             <Buttons onClick={showRegisterForm}>Register</Buttons>
                         </div>
 
                         <div className={styles.hometextbox}>
-                            <Text variant={'h1'}>Have an account? Login below</Text>
+                            <Text variant={'h2'} style={{ marginBottom: '15px', fontSize: '20px' }}>Have an account? Login below</Text>
                             <Buttons onClick={showLoginForm}>Login</Buttons>
                         </div>
                     </div>

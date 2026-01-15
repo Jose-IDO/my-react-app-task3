@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './Navbar.module.css'
 import { Text } from '../Text/Text'
 import { NavLink } from 'react-router-dom'
-import { Searchbar } from '../Search/Searchbar'
 import type { User } from '../../types/Job'
 
 type NavbarProps = {
@@ -22,12 +21,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <nav>
             <div className={styles.content}>
                 <div className={styles['logo-container']}> 
-                    <Text variant={'h2'} style={{ margin: 0, padding: 0, fontSize: 40, color: 'white' }}>
+                    <Text variant={'h2'} style={{ margin: 0, padding: 0, fontSize: 24, color: 'white', fontWeight: 'bold' }}>
                         Jobseek.com
                     </Text>
                 </div>
-
-                <Searchbar />
 
                 <div className={styles['navbar-links']}> 
                     <NavLink to="/" className={styles.link}>Home</NavLink>

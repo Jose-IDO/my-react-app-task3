@@ -1,23 +1,38 @@
 .input-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
+    width: 100%;
 }
 
 .input {
     background-color: #FFF;
-    border-radius: 4px;
+    border-radius: 6px;
     color: rgb(20, 20, 20);
-    height: 30px;
-    padding: 0px 10px;
-    width: calc(100% - 20px);
-    border: 1px solid rgb(20, 20, 20);
+    min-height: 40px;
+    padding: 8px 12px;
+    width: 100%;
+    border: 1px solid #ddd;
     outline: none;
     resize: vertical;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    border-color: #3a7475;
+    box-shadow: 0 0 0 3px rgba(58, 116, 117, 0.1);
+}
+
+.input:hover {
+    border-color: #999;
 }
 
 .input-label {
     color: rgb(20, 20, 20);
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .input-error {
@@ -27,18 +42,35 @@
 
 .button {
     width: 100%;
-    height: 40px;
-    border-radius: 8px;
+    min-height: 44px;
+    border-radius: 6px;
     background-color: #032729;
     border: none;
     cursor: pointer;
     color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    padding: 10px 20px;
 }
 
 .button:hover {
-    color: rgb(220, 220, 220);
+    color: white;
     background: linear-gradient(to right, #3a7475, #fdba3f);
-    border-radius: 10px;
-    transition: all 0.1s ease-in-out;
-    transform: translateY(-3px)
+    border-radius: 8px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .button {
+        font-size: 14px;
+        min-height: 40px;
+        padding: 8px 16px;
+    }
 }

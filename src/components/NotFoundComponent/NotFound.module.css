@@ -4,15 +4,20 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
-    height: 400px;
     color: #000000;
     background-color: white;
-    opacity: 0.7;
     border-radius: 12px;
-    padding: 20px; 
-    height: fit-content;
-    width: 70%;
-    margin: auto;
+    padding: 40px 20px; 
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-   
+@media (max-width: 768px) {
+    .not-found-cont {
+        width: 95%;
+        padding: 30px 15px;
+        gap: 15px;
+    }
 }
