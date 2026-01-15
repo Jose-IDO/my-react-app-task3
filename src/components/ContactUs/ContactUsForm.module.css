@@ -1,21 +1,17 @@
 .contact-us {
-    background-color: #FFF;
-    width: 300px;
-    min-height: 200px;
-    max-height: 1000px;
-    border-radius: 12px;
-    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 50px;
+    gap: 15px;
 }
 
-.page {
-    width: 100%;
-    height: calc(100vh - 60px - 100px);
-    /* background-color: red; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media (max-width: 768px) {
+    .contact-us {
+        max-width: 100%;
+        padding: 15px;
+        gap: 12px;
+    }
 }

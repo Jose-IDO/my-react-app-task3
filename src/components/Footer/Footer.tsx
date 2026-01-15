@@ -1,12 +1,10 @@
-import { ContentContainer } from '../ContentContainer'
 import styles from './Footer.module.css'
 
 export const Footer = () => {
   return (
     <footer>
-        <ContentContainer className={styles['footer-cont']}>
-            footer
-        </ContentContainer>
+        <div className={styles['footer-cont']}>
+        </div>
     </footer>
   )
 }
